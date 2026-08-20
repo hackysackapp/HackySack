@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — HackySack</title>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <style>
+    :root {
+      --bg: #0b0d17;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-gradient: linear-gradient(135deg, #6366f1, #a855f7);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.7;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 40px;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #ffffff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .date {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 32px;
+    }
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 28px 0 12px 0;
+    }
+    p, li {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+    ul {
+      padding-left: 24px;
+      margin-bottom: 16px;
+    }
+    a {
+      color: #818cf8;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-links">
+      <a href="index.html">&larr; Back to Home</a>
+      <a href="privacy.html">Privacy Policy &rarr;</a>
+    </div>
+    <h1>Terms of Service</h1>
+    <div class="date">Effective Date: August 11, 2026</div>
+
+    <h2>1. Terms of Service & Disclaimer of Liability</h2>
+    <ul>
+      <li><strong>Software Provided "AS IS":</strong> HackySack is provided on an "AS IS" and "AS AVAILABLE" basis, without warranty of any kind, express or implied.</li>
+      <li><strong>User Responsibility:</strong> Users assume sole responsibility for how they use HackySack during interview preparation or live sessions. The software developers and contributors are not liable for any employment decisions, interview outcomes, or institutional policy compliance.</li>
+      <li><strong>Limitation of Liability:</strong> In no event shall the authors or copyright holders be liable for any direct, indirect, incidental, or consequential damages arising out of the use or inability to use this software.</li>
+    </ul>
+
+    <h2>2. Subscription, Billing & Cancellation Policy</h2>
+    <ul>
+      <li><strong>Flexible Passes:</strong> HackySack offers optional 7-Day Sprint Passes and Pro Monthly Passes for zero-setup cloud AI access.</li>
+      <li><strong>Cancel Anytime:</strong> Subscriptions can be cancelled at any time directly through the Stripe Customer Billing Portal or by contacting support. Access remains active through the end of your billing cycle.</li>
+    </ul>
+
+    <h2>3. Privacy Policy & Data Security</h2>
+    <ul>
+      <li><strong>Local Data Storage:</strong> All candidate resume text, job descriptions, session notes, and API keys are stored locally on your device (in local browser storage and Windows Credential Manager).</li>
+      <li><strong>Zero Audio Retention:</strong> HackySack does not record, harvest, or sell your audio or personal interview transcripts to external analytics servers.</li>
+      <li><strong>Hardware Encryption:</strong> API keys and access tokens are encrypted locally using native Windows hardware DPAPI encryption (<code>keyring-rs</code>).</li>
+    </ul>
+
+    <h2>4. Contact & Support</h2>
+    <p>For customer support, billing questions, or legal inquiries, please contact <a href="mailto:support@hackysack.app">support@hackysack.app</a> or visit our GitHub at <a href="https://github.com/hackysackapp/HackySack">github.com/hackysackapp/HackySack</a>.</p>
+  </div>
+</body>
+</html>

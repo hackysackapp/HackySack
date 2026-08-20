@@ -1,0 +1,35 @@
+# Rust/Cargo build output
+/src-tauri/target/
+
+# Node modules
+node_modules/
+
+# Vite build output
+dist/
+
+# Environment files (never commit API keys!)
+.env
+.env.local
+.env*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# Keys & Secrets
+*.key
+*.key.pub
+/~
+
+# Temporary logs & test outputs
+*.log
+*.tmp
+out.txt
+err.txt
+exe_error.log
+crash_output.txt
+

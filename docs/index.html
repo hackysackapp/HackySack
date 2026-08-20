@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HackySack — Stealth AI Interview Assistant</title>
+  <meta name="description" content="An open-source, stealth AI interview assistant for Windows. Ace live technical and behavioral job interviews with instant, glanceable answers completely hidden from screen shares.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0d17;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-gradient: linear-gradient(135deg, #6366f1, #a855f7);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 54px;
+    }
+    .brand-header {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .inline-logo {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      filter: drop-shadow(0 6px 16px rgba(99, 102, 241, 0.4));
+    }
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #ffffff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto 32px;
+      font-weight: 400;
+    }
+    .cta-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: var(--accent-gradient);
+      color: #ffffff;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(99, 102, 241, 0.6);
+    }
+    .btn-secondary {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+    .btn-kofi {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(217, 119, 6, 0.25)) !important;
+      border: 1.5px solid #f59e0b !important;
+      color: #fbbf24 !important;
+      font-weight: 700 !important;
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.25);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    .btn-kofi:hover {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.38), rgba(217, 119, 6, 0.48)) !important;
+      border-color: #fde047 !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 24px rgba(245, 158, 11, 0.5) !important;
+      transform: translateY(-2px) scale(1.02);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 54px;
+    }
+    @media (max-width: 640px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: border-color 0.2s ease;
+    }
+    .card:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-bottom: 54px;
+    }
+    .pricing-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      position: relative;
+    }
+    .pricing-card.featured {
+      border-color: #6366f1;
+      background: rgba(99, 102, 241, 0.06);
+    }
+    .badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-gradient);
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+    .price {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 12px 0 6px;
+    }
+    .price-period {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .pricing-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      text-align: left;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .pricing-features li {
+      margin-bottom: 10px;
+      padding-left: 20px;
+      position: relative;
+    }
+    .pricing-features li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #10b981;
+      font-weight: bold;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 54px;
+    }
+    th, td {
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+    }
+    th {
+      background: rgba(255, 255, 255, 0.02);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+    td code {
+      background: rgba(99, 102, 241, 0.15);
+      color: #a855f7;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    footer {
+      text-align: center;
+      padding-top: 36px;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand-header">
+        <img src="https://raw.githubusercontent.com/hackysackapp/HackySack/main/src/assets/logo.webp" alt="HackySack Logo" class="inline-logo">
+        <h1>HackySack</h1>
+      </div>
+      <p class="subtitle">The stealth AI interview assistant for Windows. Ace live technical, behavioral, and coding interviews with instant, glanceable answers.</p>
+      <div class="cta-group">
+        <a href="https://github.com/hackysackapp/HackySack/releases/download/v1.0.0/HackySack_1.0.0_x64-setup.exe" class="btn btn-primary">
+          Download Windows App (.exe)
+        </a>
+        <a href="https://github.com/hackysackapp/HackySack" class="btn btn-secondary">
+          View GitHub Repository
+        </a>
+        <a href="https://ko-fi.com/hackysackapp" target="_blank" class="btn btn-kofi">
+          ☕ Buy me a coffee or loaf of bread
+        </a>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <h3>🛡️ 100% Stealth & Screen-Share Proof</h3>
+        <p>Share your screen on Zoom, Microsoft Teams, or Google Meet with zero stress. Hardware-level DWM window protection guarantees your interviewer only sees your desktop—never the assistant window.</p>
+      </div>
+      <div class="card">
+        <h3>🎛️ Independent Mic & Speaker Source Control</h3>
+        <p>Choose your exact input microphone and output playback device (headset, external monitor, or virtual cable) in Settings. Never miss audio due to Windows default audio switches.</p>
+      </div>
+      <div class="card">
+        <h3>👻 Click-Through Ghost Mode (Ctrl+Alt+C)</h3>
+        <p>Make the overlay completely click-transparent. Code in your IDE, navigate tabs, and click on your video call directly through the assistant window without moving or minimizing it.</p>
+      </div>
+      <div class="card">
+        <h3>🧠 Resume & Job Description Synthesis</h3>
+        <p>Upload PDF, DOCX, or TXT of your Resume, Target Job Description, and Notes. HackySack directly weaves your authentic career projects, tech stack, and measurable metrics into every response.</p>
+      </div>
+      <div class="card">
+        <h3>📸 1-Click Screen Capture OCR (F10)</h3>
+        <p>Capture live LeetCode coding problems, SQL database schemas, or slide decks directly from your screen into structured text context with zero typing.</p>
+      </div>
+      <div class="card">
+        <h3>⚡ Teleprompter Live Response Format</h3>
+        <p>Designed for 0.5-second glanceability during live calls. Features a 3-second direct answer, bold keyword pills, a 60-second speaking script, and copyable working code snippets—generated in under 1.5 seconds.</p>
+      </div>
+      <div class="card">
+        <h3>🎙️ Dual-Channel Speech Transcript Engine</h3>
+        <p>High-performance Rust WASAPI audio capture simultaneously listening to system speaker loopback (interviewer) and microphone (candidate) with real-time speaker separation and VAD filtering.</p>
+      </div>
+      <div class="card">
+        <h3>🔒 Hardware-Encrypted Security & Free BYOK</h3>
+        <p>Your API keys and tokens are encrypted with AES secret obfuscation in Windows Credential Manager. Supports 100% Free BYOK (Groq, OpenAI, Anthropic, Gemini, OpenRouter) or Zero-Setup Cloud Passes.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Flexible Pricing Options</h2>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Free BYOK</h3>
+        <div class="price">$0</div>
+        <div class="price-period">Forever Free</div>
+        <ul class="pricing-features">
+          <li>Bring your own AI API key (OpenRouter, Groq, OpenAI, Anthropic, Gemini)</li>
+          <li>Hardware-encrypted key storage</li>
+          <li>Full stealth screen protection</li>
+          <li>Unlimited local sessions</li>
+        </ul>
+        <a href="https://github.com/hackysackapp/HackySack/releases/download/v1.0.0/HackySack_1.0.0_x64-setup.exe" class="btn btn-secondary" style="width: 100%; justify-content: center;">
+          Download Free
+        </a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="badge">Most Popular</div>
+        <h3>7-Day Sprint Pass</h3>
+        <div class="price">$19.99</div>
+        <div class="price-period">per week</div>
+        <ul class="pricing-features">
+          <li>Zero setup required</li>
+          <li>Pre-configured OpenRouter access</li>
+          <li>Claude 3.5 Sonnet & GPT-4o models</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <a href="https://buy.stripe.com/eVq7sNa056VFbDceJs3sI02" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;">
+          Get Sprint Pass
+        </a>
+      </div>
+
+      <div class="pricing-card">
+        <h3>Pro Monthly Pass</h3>
+        <div class="price">$29.99</div>
+        <div class="price-period">per month</div>
+        <ul class="pricing-features">
+          <li>Zero setup required</li>
+          <li>Full monthly zero-setup access</li>
+          <li>Priority high-speed OpenRouter LLMs</li>
+          <li>Continuous updates & support</li>
+        </ul>
+        <a href="https://buy.stripe.com/6oU14p3BHdk322C44O3sI01" target="_blank" class="btn btn-secondary" style="width: 100%; justify-content: center;">
+          Get Pro Monthly
+        </a>
+      </div>
+    </div>
+
+    <!-- Windows SmartScreen Disclaimer -->
+    <div style="width: 100%; max-width: 960px; margin: 40px auto 32px auto; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--card-border); border-radius: 12px; padding: 16px 20px; text-align: left; font-size: 0.88rem; color: var(--text-muted); display: flex; align-items: center; gap: 14px;">
+      <span style="font-size: 1.4rem;">ℹ️</span>
+      <div>
+        <strong style="color: var(--text-main); display: block; margin-bottom: 2px;">Windows SmartScreen First Launch Note:</strong>
+        First time launching? Click <strong>More info</strong> &rarr; <strong>Run anyway</strong> to start HackySack.
+      </div>
+    </div>
+
+    <h2 class="section-title">Quick Keyboard Controls</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Shortcut</th>
+          <th>Action</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>Ctrl + Shift + H</code></td>
+          <td>Show / Focus Window</td>
+          <td>Global hotkey to bring HackySack to front from anywhere in Windows</td>
+        </tr>
+        <tr>
+          <td><code>F8</code></td>
+          <td>Clear Context Buffer</td>
+          <td>Instantly clears context buffer items and live transcript log</td>
+        </tr>
+        <tr>
+          <td><code>F9</code></td>
+          <td>Record / Stop Audio</td>
+          <td>Starts or stops live background audio listening and transcription</td>
+        </tr>
+        <tr>
+          <td><code>F10</code></td>
+          <td>Capture Screenshot</td>
+          <td>Captures active screen content as visual context for AI questions</td>
+        </tr>
+        <tr>
+          <td><code>F12 / F11</code></td>
+          <td>Ask AI Answer</td>
+          <td>Triggers manual AI answer for the current transcribed question and history</td>
+        </tr>
+        <tr>
+          <td><code>Ctrl + Alt + C</code></td>
+          <td>Click-Through Mode</td>
+          <td>Passes mouse clicks directly through to windows behind HackySack</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <footer>
+      <p style="margin-bottom: 8px;">
+        <a href="terms.html" style="color: #818cf8; text-decoration: none; margin: 0 8px;">Terms of Service</a> • 
+        <a href="privacy.html" style="color: #818cf8; text-decoration: none; margin: 0 8px;">Privacy Policy</a> • 
+        <a href="mailto:support@hackysack.app" style="color: #818cf8; text-decoration: none; margin: 0 8px;">Contact & Support</a> • 
+        <a href="https://github.com/hackysackapp/HackySack" style="color: #818cf8; text-decoration: none; margin: 0 8px;">GitHub</a>
+      </p>
+      <p style="font-size: 0.82rem; color: var(--text-muted);">HackySack is free and open-source under the MIT License.</p>
+    </footer>
+  </div>
+</body>
+</html>

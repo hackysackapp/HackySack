@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Successful — HackySack</title>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <style>
+    :root {
+      --bg: #090a0f;
+      --bg-card: #121520;
+      --border: #23283b;
+      --accent: #6366f1;
+      --accent-gradient: linear-gradient(135deg, #6366f1, #a855f7);
+      --success: #10b981;
+      --success-gradient: linear-gradient(135deg, #10b981, #059669);
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 28px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+    }
+    .icon-box {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.15);
+      border: 2px solid #10b981;
+      color: var(--success);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-bottom: 16px;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.35);
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+    p.lead {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .steps-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+    .step-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .step-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent-gradient);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+    .step-text h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+    .step-text p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      color: #fff;
+      font-weight: 700;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .btn-download {
+      background: var(--accent-gradient);
+      box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+    }
+    .btn-download:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.5);
+    }
+    .btn-activate {
+      background: var(--success-gradient);
+      box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+    }
+    .btn-activate:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5);
+    }
+    .btn-copy {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 6px 12px;
+      font-size: 11px;
+    }
+    .btn-copy:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .token-card {
+      background: rgba(99, 102, 241, 0.05);
+      border: 1px dashed rgba(99, 102, 241, 0.35);
+      border-radius: 12px;
+      padding: 12px 14px;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+    .token-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .token-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .token-val {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      color: #e0e7ff;
+      word-break: break-all;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .notice {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      text-align: left;
+      line-height: 1.5;
+    }
+    .notice strong {
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon-box">✓</div>
+    <h1>Payment Successful!</h1>
+    <p class="lead">Thank you for subscribing to <strong>HackySack Cloud</strong>. Follow the 2 steps below to complete setup on your PC.</p>
+
+    <!-- Token Section -->
+    <div id="tokenContainer" class="token-card" style="display:none;">
+      <div class="token-header">
+        <span class="token-title">🔑 Your Cloud Access Token</span>
+        <button id="copyBtn" class="btn btn-copy" onclick="copyToken()">📋 Copy</button>
+      </div>
+      <div class="token-val" id="tokenText"></div>
+    </div>
+
+    <!-- 2 Steps -->
+    <div class="steps-container">
+      <div class="step-box">
+        <div class="step-info">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <h4>Install HackySack</h4>
+            <p>If you don't have the app installed yet</p>
+          </div>
+        </div>
+        <a id="downloadBtn" href="https://github.com/hackysackapp/HackySack/releases/latest/download/HackySack_1.0.0_x64-setup.exe" class="btn btn-download">
+          ⬇️ Download (.exe)
+        </a>
+      </div>
+
+      <div class="step-box">
+        <div class="step-info">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <h4>1-Click Activate</h4>
+            <p>Opens HackySack & unlocks Cloud Pass</p>
+          </div>
+        </div>
+        <a id="launchBtn" href="#" class="btn btn-activate">
+          🚀 Open & Activate
+        </a>
+      </div>
+    </div>
+
+    <!-- Instructions / SmartScreen tip -->
+    <div class="notice">
+      💡 <strong>Already have HackySack installed?</strong> It will launch automatically in a moment. If prompted on first run, click <strong>More info → Run anyway</strong> to start.
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    
+    function copyToken() {
+      if (!token) return;
+      navigator.clipboard.writeText(token).then(() => {
+        const btn = document.getElementById('copyBtn');
+        btn.innerText = "✓ Copied!";
+        setTimeout(() => { btn.innerText = "📋 Copy"; }, 2500);
+      });
+    }
+
+    if (token) {
+      document.getElementById('tokenContainer').style.display = 'block';
+      document.getElementById('tokenText').innerText = token;
+      
+      const deepLinkUrl = "hackysack://activate?token=" + encodeURIComponent(token);
+      document.getElementById('launchBtn').href = deepLinkUrl;
+      
+      // Auto-trigger 1-click launch for users with the desktop app already open/installed
+      setTimeout(() => {
+        window.location.href = deepLinkUrl;
+      }, 1000);
+    } else {
+      document.getElementById('launchBtn').href = "https://github.com/hackysackapp/HackySack/releases/latest";
+      document.getElementById('launchBtn').innerText = "Releases Page";
+    }
+  </script>
+</body>
+</html>

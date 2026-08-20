@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — HackySack</title>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <style>
+    :root {
+      --bg: #0b0d17;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-gradient: linear-gradient(135deg, #6366f1, #a855f7);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.7;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 40px;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #ffffff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .date {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 32px;
+    }
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 28px 0 12px 0;
+    }
+    p, li {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+    ul {
+      padding-left: 24px;
+      margin-bottom: 16px;
+    }
+    a {
+      color: #818cf8;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-links">
+      <a href="index.html">&larr; Back to Home</a>
+      <a href="terms.html">Terms of Service &rarr;</a>
+    </div>
+    <h1>Privacy Policy</h1>
+    <div class="date">Effective Date: August 11, 2026</div>
+
+    <h2>1. Overview & Privacy Commitment</h2>
+    <p>At HackySack, your interview privacy is our primary engineering focus. HackySack is designed from the ground up to keep your personal career information, resumes, and interview audio strictly confidential and secure.</p>
+
+    <h2>2. Data Collection & Local Storage</h2>
+    <ul>
+      <li><strong>Local Storage:</strong> Your resume, job descriptions, session notes, and preferences are stored exclusively in your local machine's protected app storage.</li>
+      <li><strong>Hardware Credential Encryption:</strong> API keys and subscription tokens are stored using native Windows Data Protection API (DPAPI) via <code>keyring-rs</code> in the Windows Credential Manager.</li>
+      <li><strong>Zero Audio Retention:</strong> HackySack does not record, harvest, store, or sell your audio stream or interview conversations to external tracking servers. Audio captured during live sessions is processed strictly in-memory for transcription.</li>
+    </ul>
+
+    <h2>3. Cloud Pass & Third-Party AI Services</h2>
+    <ul>
+      <li><strong>Free BYOK Users:</strong> When bringing your own API key (Groq, OpenRouter, OpenAI, Anthropic, Gemini), requests are routed directly from your desktop to your designated provider without passing through any intermediate proxy.</li>
+      <li><strong>Cloud Pass Subscribers:</strong> Requests are processed through encrypted Supabase Edge functions without logging or persisting prompt text.</li>
+      <li><strong>Payment Processing:</strong> Billing information is processed directly by Stripe under PCI-DSS Level 1 compliance. HackySack never sees or stores your credit card details.</li>
+    </ul>
+
+    <h2>4. Contact Us</h2>
+    <p>If you have any questions or privacy inquiries, please reach out to <a href="mailto:support@hackysack.app">support@hackysack.app</a> or open a discussion on our <a href="https://github.com/hackysackapp/HackySack">GitHub repository</a>.</p>
+  </div>
+</body>
+</html>

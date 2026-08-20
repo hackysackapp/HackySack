@@ -1,0 +1,164 @@
+/* App.module.css */
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background: color-mix(in srgb, var(--bg-base) calc(var(--app-opacity, 1) * 100%), transparent);
+  transition: background 200ms ease;
+}
+
+.topbar {
+  flex-shrink: 0;
+  position: relative; /* Settings dropdown anchors to this */
+  z-index: 50;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  gap: 0;
+}
+
+.sidebar {
+  width: clamp(200px, 32vw, 320px);
+  flex-shrink: 1;
+  min-width: 180px;
+  margin: 12px 0 12px 12px;
+  padding: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+}
+
+.divider {
+  width: 1px;
+  background: var(--border);
+  margin: 12px 8px;
+  flex-shrink: 0;
+}
+
+.content {
+  flex: 1;
+  overflow: hidden;
+  padding: 12px 12px 12px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottomDock {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 14px;
+  background: color-mix(in srgb, var(--bg-surface) calc(var(--app-opacity, 1) * 100%), transparent);
+  border-top: 1px solid var(--border-bright);
+  z-index: 50;
+}
+
+.statusBar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 14px;
+  background: color-mix(in srgb, var(--bg-surface) calc(var(--app-opacity, 1) * 100%), transparent);
+  border-top: 1px solid var(--border-bright);
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--green);
+  animation: pulse-dot 2s ease infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+/* ── Responsive Layout Adaptations for Window Resizing ───────── */
+@media (max-width: 680px) {
+  .sidebar {
+    width: 240px;
+    margin: 6px 0 6px 6px;
+    padding: 8px;
+  }
+  .content {
+    padding: 6px 6px 6px 0;
+  }
+  .statusBar {
+    padding: 4px 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .main {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: auto;
+    height: 150px;
+    margin: 6px;
+    flex-shrink: 0;
+  }
+  .divider {
+    display: none;
+  }
+  .content {
+    padding: 6px;
+  }
+  .statusBar {
+    display: none; /* Hide status bar in compact floating widget sizes */
+  }
+}
+
+/* ── Visual Bottom Corner Drag Handles ────────────────────────── */
+.cornerGrip {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.5;
+  transition: opacity var(--transition);
+}
+
+.cornerGrip:hover {
+  opacity: 1;
+}
+
+.cornerBottomLeft {
+  bottom: 1px;
+  left: 1px;
+  cursor: nesw-resize;
+  border-bottom: 2px solid var(--accent-start);
+  border-left: 2px solid var(--accent-start);
+  border-bottom-left-radius: 4px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  color: var(--accent-start);
+}
+
+.cornerBottomRight {
+  bottom: 1px;
+  right: 1px;
+  cursor: nwse-resize;
+  border-bottom: 2px solid var(--accent-end);
+  border-right: 2px solid var(--accent-end);
+  border-bottom-right-radius: 4px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  color: var(--accent-end);
+}
